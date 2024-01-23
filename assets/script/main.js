@@ -84,15 +84,27 @@ let postContainer = document.getElementById("container")
 for (let i = 0; i < posts.length; i++) {
 
 
+    // generazioine delle prime due lettere  
     if (posts[i].author.image === null){
         let profilePic = document.getElementById("profile-pic")
 
-        let uppercaseLetters = (posts[i].author.name).map((element) => {
-            return element[0].charAt(0).toUpperCase() 
-        })
+        let nameAndSurname = posts[i].author.name
 
-        profilePic.innerHTML = uppercaseLetters 
-        profilePic.classList.add("d-flex-bg")
+        let startingLetters = nameAndSurname.split(" ")[0].charAt(0) + nameAndSurname.split(" ")[1].charAt(0);
+
+        console.log(startingLetters)
+        
+        profilePic.innerHTML += startingLetters
+        
+    } else {
+        let profilePic = document.getElementById("profile-pic")
+
+        let imgHtml = document.createElement("img")
+        imgHtml.setAttribute(`"src", ${posts[i].author.image}`)
+
+        imgHtml.classList.add("profile-pic")
+
+        profilePic += imgHtml 
     }
 
 
@@ -103,7 +115,7 @@ for (let i = 0; i < posts.length; i++) {
             <div class="post__header">
                 <div class="post-meta">                    
                     <div id="profile-pic" class="post-meta__icon d-flex-bg">
-                        <img class="profile-pic" src="${posts[i].author.image}" alt="${posts[i].author.name}">                    
+                    
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${posts[i].author.name}</div>
