@@ -27,7 +27,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=15"
         },
         "likes": 80,
-        "created": "2021-06-25"
+        "created": "06-25-2021"
     },
     {
         "id": 2,
@@ -38,7 +38,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=10"
         },
         "likes": 120,
-        "created": "2021-09-03"
+        "created": "09-03-2021"
     },
     {
         "id": 3,
@@ -49,7 +49,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=20"
         },
         "likes": 78,
-        "created": "2021-05-15"
+        "created": "05-15-2021"
     },
     {
         "id": 4,
@@ -57,10 +57,10 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=24",
         "author": {
             "name": "Luca Formicola",
-            "image": null
+            "image": null 
         },
         "likes": 56,
-        "created": "2021-04-03"
+        "created": "04-03-2021"
     },
     {
         "id": 5,
@@ -71,68 +71,19 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=29"
         },
         "likes": 95,
-        "created": "2021-03-05"
+        "created": "03-05-2021"
     }
 ];
 
-
-
-
-
 let postContainer = document.getElementById("container")
-let likeBtn = document.getElementById("btn")
-let likeCounter = document.getElementById("like-counter-1")
 
 for (let i = 0; i < posts.length; i++) {
-
-    // likeBtn.addEventListener("click", function(){
-    //     let like = posts[i].likes 
-    //     likeCounter = like++
-
-    //     likeBtn.classList.add("like-button--liked") 
-
-    // })
-
-    // likeBtn.addEventListener("click", function(){
-    //     let like = posts[i].likes 
-    //     likeCounter = like--
-
-    //     likeBtn.classList.remove("like-button--liked")
-
-    // })
-
-    // generazioine delle prime due lettere  
-
-    let profilePic = document.getElementById("profile-pic")
-
-    if (posts[i].author.image === null){
-        
-        let nameAndSurname = posts[i].author.name
-
-        let startingLetters = nameAndSurname.split(" ")[0].charAt(0) + nameAndSurname.split(" ")[1].charAt(0);
-
-        console.log(startingLetters)
-        
-        profilePic.innerHTML = startingLetters
-        
-    } else {
-
-        let imgHtml = document.createElement("img")
-        imgHtml.src = posts[i].author.image 
-
-        imgHtml.classList.add("profile-pic")
-
-        profilePic += imgHtml 
-    }
-
-
-
-
+    
     postContainer.innerHTML += `
         <div class="post">
             <div class="post__header">
                 <div class="post-meta">                    
-                    <div id="profile-pic" class="post-meta__icon d-flex-bg">
+                    <div class="post-meta__icon d-flex-bg profile-pic-change" style="width: 60px; height: 60px">
                         <img class="profile-pic" src="${posts[i].author.image}">
                     </div>
                     <div class="post-meta__data">
@@ -148,17 +99,59 @@ for (let i = 0; i < posts.length; i++) {
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a id="btn" class="like-button  js-like-button" href="#" data-postid="1">
+                        <a class="like-button  js-like-button btn" href="#" data-postid="1">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
+                        Piace a <b class="js-likes-counter like-counter-1">${posts[i].likes}</b> persone
                     </div>
                 </div> 
             </div>            
         </div>
     `
+}
+
+// generazioine delle prime due lettere  
+
+let profilePic = document.querySelectorAll(".profile-pic-change")
+let likeBtn = document.querySelectorAll(".btn")
+let likeCounter = document.querySelectorAll(".like-counter-1")
+
+for(let i = 0; i < profilePic.length; i++){
+    // console.log(profilePic)
+
+    if (posts[i].author.image === null){
+        
+        let nameAndSurname = posts[i].author.name
+        let startingLetters = nameAndSurname.split(" ")[0].charAt(0) + nameAndSurname.split(" ")[1].charAt(0);
+        console.log(startingLetters)
+        profilePic[i].innerHTML = startingLetters
+        
+    } 
 
 }
+
+for(let i = 0; i < likeBtn.length; i++){
+        // aumento del counter dei like 
+
+        likeBtn[i].addEventListener("click", function(e){
+            e.preventDefault()
+
+
+            if (!likeBtn[i].classList.contains("like-button--liked")){
+                posts[i].likes++
+                likeCounter[i].innerHTML = posts[i].likes
+                likeBtn[i].classList.toggle("like-button--liked") 
+            } else {
+                posts[i].likes--
+                likeCounter[i].innerHTML = posts[i].likes
+                likeBtn[i].classList.remove("like-button--liked") 
+    
+            }
+    
+        }) 
+}
+
+
