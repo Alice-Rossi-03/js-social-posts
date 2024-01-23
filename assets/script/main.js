@@ -80,27 +80,45 @@ const posts = [
 
 
 let postContainer = document.getElementById("container")
+let likeBtn = document.getElementById("btn")
+let likeCounter = document.getElementById("like-counter-1")
 
 for (let i = 0; i < posts.length; i++) {
 
+    // likeBtn.addEventListener("click", function(){
+    //     let like = posts[i].likes 
+    //     likeCounter = like++
+
+    //     likeBtn.classList.add("like-button--liked") 
+
+    // })
+
+    // likeBtn.addEventListener("click", function(){
+    //     let like = posts[i].likes 
+    //     likeCounter = like--
+
+    //     likeBtn.classList.remove("like-button--liked")
+
+    // })
 
     // generazioine delle prime due lettere  
-    if (posts[i].author.image === null){
-        let profilePic = document.getElementById("profile-pic")
 
+    let profilePic = document.getElementById("profile-pic")
+
+    if (posts[i].author.image === null){
+        
         let nameAndSurname = posts[i].author.name
 
         let startingLetters = nameAndSurname.split(" ")[0].charAt(0) + nameAndSurname.split(" ")[1].charAt(0);
 
         console.log(startingLetters)
         
-        profilePic.innerHTML += startingLetters
+        profilePic.innerHTML = startingLetters
         
     } else {
-        let profilePic = document.getElementById("profile-pic")
 
         let imgHtml = document.createElement("img")
-        imgHtml.setAttribute(`"src", ${posts[i].author.image}`)
+        imgHtml.src = posts[i].author.image 
 
         imgHtml.classList.add("profile-pic")
 
@@ -115,7 +133,7 @@ for (let i = 0; i < posts.length; i++) {
             <div class="post__header">
                 <div class="post-meta">                    
                     <div id="profile-pic" class="post-meta__icon d-flex-bg">
-                    
+                        <img class="profile-pic" src="${posts[i].author.image}">
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${posts[i].author.name}</div>
@@ -130,7 +148,7 @@ for (let i = 0; i < posts.length; i++) {
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                        <a id="btn" class="like-button  js-like-button" href="#" data-postid="1">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
