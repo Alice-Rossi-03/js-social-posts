@@ -4,7 +4,7 @@
 // STEP 1 - Creiamo il nostro array di oggetti che rappresentano ciascun post.
 // Ogni post dovrà avere le informazioni necessarie per stampare la relativa card:
     // - id del post, numero progressivo da 1 a n
-    // - nome autore,
+    // - nome autore, 
     // - foto autore,
     // - data in formato americano (mm-gg-yyyy),
     // - testo del post,
@@ -76,3 +76,59 @@ const posts = [
 ];
 
 
+
+
+
+let postContainer = document.getElementById("container")
+
+for (let i = 0; i < posts.length; i++) {
+
+
+    if (posts[i].author.image === null){
+        let profilePic = document.getElementById("profile-pic")
+
+        let uppercaseLetters = (posts[i].author.name).map((element) => {
+            return element[0].charAt(0).toUpperCase() 
+        })
+
+        profilePic.innerHTML = uppercaseLetters 
+        profilePic.classList.add("d-flex-bg")
+    }
+
+
+
+
+    postContainer.innerHTML += `
+        <div class="post">
+            <div class="post__header">
+                <div class="post-meta">                    
+                    <div id="profile-pic" class="post-meta__icon d-flex-bg">
+                        <img class="profile-pic" src="${posts[i].author.image}" alt="${posts[i].author.name}">                    
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">${posts[i].author.name}</div>
+                        <div class="post-meta__time">${posts[i].created}</div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="post__text">${posts[i].content}</div>
+            <div class="post__image">
+                <img src="${posts[i].media}" alt="">
+            </div>
+            <div class="post__footer">
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                            <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">
+                        Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
+                    </div>
+                </div> 
+            </div>            
+        </div>
+    `
+
+}
