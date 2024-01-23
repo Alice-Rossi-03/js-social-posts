@@ -27,7 +27,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=15"
         },
         "likes": 80,
-        "created": "06-25-2021"
+        "created": "2021-06-25"
     },
     {
         "id": 2,
@@ -38,7 +38,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=10"
         },
         "likes": 120,
-        "created": "09-03-2021"
+        "created": "2021-09-03"
     },
     {
         "id": 3,
@@ -49,7 +49,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=20"
         },
         "likes": 78,
-        "created": "05-15-2021"
+        "created": "2021-05-15"
     },
     {
         "id": 4,
@@ -60,7 +60,7 @@ const posts = [
             "image": null 
         },
         "likes": 56,
-        "created": "04-03-2021"
+        "created": "2021-04-03"
     },
     {
         "id": 5,
@@ -71,7 +71,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=29"
         },
         "likes": 95,
-        "created": "03-05-2021"
+        "created": "2021-03-05"
     }
 ];
 
@@ -79,6 +79,17 @@ let postContainer = document.getElementById("container")
 
 for (let i = 0; i < posts.length; i++) {
     
+    // creazione della data 
+    let arrayDate = posts[i].created
+
+    let date = new Date(arrayDate) 
+
+    let day = date.getDate()
+    let month = date.getMonth() + 1
+    let year = date.getFullYear()
+
+    let americanDate = month.toString().padStart(2, '0') + '-' + day.toString().padStart(2, '0') + '-' + year
+
     postContainer.innerHTML += `
         <div class="post">
             <div class="post__header">
@@ -88,7 +99,7 @@ for (let i = 0; i < posts.length; i++) {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${posts[i].author.name}</div>
-                        <div class="post-meta__time">${posts[i].created}</div>
+                        <div class="post-meta__time">${americanDate}</div>
                     </div>                    
                 </div>
             </div>
@@ -111,6 +122,7 @@ for (let i = 0; i < posts.length; i++) {
             </div>            
         </div>
     `
+
 }
 
 // generazioine delle prime due lettere  
@@ -153,5 +165,6 @@ for(let i = 0; i < likeBtn.length; i++){
     
         }) 
 }
+
 
 
