@@ -88,7 +88,7 @@ for (let i = 0; i < posts.length; i++) {
     let month = date.getMonth() + 1
     let year = date.getFullYear()
 
-    let americanDate = month.toString().padStart(2, '0') + '-' + day.toString().padStart(2, '0') + '-' + year
+    let italianDate = day.toString().padStart(2, '0') + '-' + month.toString().padStart(2, '0') + '-' + year
 
     postContainer.innerHTML += `
         <div class="post">
@@ -99,7 +99,7 @@ for (let i = 0; i < posts.length; i++) {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${posts[i].author.name}</div>
-                        <div class="post-meta__time">${americanDate}</div>
+                        <div class="post-meta__time">${italianDate}</div>
                     </div>                    
                 </div>
             </div>
